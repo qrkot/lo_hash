@@ -12,4 +12,4 @@ A user-defined Python function for PostgreSQL to calculate hashes of very large 
 `select lo_hash(LARGE_OBJECT_ID, HASH_TYPE);`
 
 ## Copyright and licence.
-The code is taken from (Postgres mailing lists)[https://www.postgresql.org/message-id/2099704620.64179.1690649864815%40office.mailbox.org] and licenced under PostgreSQL licence, as per (PostgreSQL archive policy)[https://www.postgresql.org/about/policies/archives/].
+The code is taken from [PostgreSQL mailing lists](https://www.postgresql.org/message-id/2099704620.64179.1690649864815%40office.mailbox.org) and licenced under **PostgreSQL licence**, as per [PostgreSQL archive policy](https://www.postgresql.org/about/policies/archives/).
