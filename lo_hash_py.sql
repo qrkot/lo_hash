@@ -1,14 +1,15 @@
 BEGIN;
 
-  CREATE EXTENSION plpython3u;
+--  CREATE EXTENSION plpython3u;
 
-	CREATE OR REPLACE FUNCTION lo_hash(loid oid, name text)
+	CREATE OR REPLACE FUNCTION lo_hash(loid oid, hash_name text)
 	    RETURNS bytea
 	    LANGUAGE plpython3u
 	AS $$
+	
 	    import hashlib
 	
-	    hash = hashlib.new(name)
+	    hash = hashlib.new(hash_name)
 	
 	    # Check if large object exists.
 	    plan = plpy.prepare("""
@@ -16,6 +17,7 @@ BEGIN;
 	        FROM pg_largeobject_metadata
 	        WHERE oid = $1
 	    """, ['oid'])
+	
 	    rv = plpy.execute(plan, [loid])
 	
 	    if rv.nrows() == 0:
@@ -28,6 +30,7 @@ BEGIN;
 	        WHERE loid = $1
 	        ORDER BY pageno
 	    """, ['oid'])
+	
 	    pages = plpy.cursor(plan, [loid])
 	
 	    for page in pages:
